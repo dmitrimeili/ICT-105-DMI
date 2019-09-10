@@ -1,0 +1,81 @@
+20Km de Lausanne: historique des commandes. Tout en commentaires.
+
+/*Partie 1*/
+/*1*/SELECT * FROM results;
+
+/*2*/SELECT firstname, lastname, category, place, placecategory, totaltime FROM results;
+
+/*3*/SELECT DISTINCT category FROM results;
+
+/*4*/SELECT firstname, lastname, place, category, placecategory FROM results;
+
+/*5*/SELECT firstname, lastname, category, placecategory, totaltime FROM results
+WHERE placecategory = 1
+
+/*6*/SELECT firstname, lastname, birthyear, category FROM results
+WHERE placecategory = 1
+ORDER BY birthyear DESC;
+
+/*7*/SELECT firstname, lastname, placecategory, city, totaltime FROM results
+WHERE category="20-H45" and placecategory BETWEEN 1 AND 10
+ORDER BY placecategory;
+
+/*8*/SELECT bib, firstname, lastname, birthyear, city, totaltime FROM results
+WHERE category="20-H70"
+ORDER BY city, birthyear DESC;
+
+
+
+/*Partie 2*/
+
+/*1*/SELECT firstname, lastname, bib, totaltime FROM results
+WHERE bib < 1000
+ORDER BY totaltime;
+
+/*2*/SELECT firstname, lastname, place, birthyear FROM results
+WHERE birthyear BETWEEN 1960 AND 1965;
+
+/*3*/SELECT firstname, lastname, city FROM results
+WHERE lastname LIKE ('%ter%');
+
+/*4*/SELECT firstname, lastname, city FROM results
+WHERE firstname LIKE ('%Robert');/*avec rien après on aura pas de Roberto ou autre que Robert*/
+
+/*5*/SELECT firstname, lastname, city FROM results
+WHERE city IN ('Aigle', 'Blonay', 'Riaz');
+
+
+
+/*Partie 3*/
+
+
+/*1*/SELECT firstname, lastname, birthyear, place, city, totaltime, category FROM results
+WHERE birthyear >1946 AND city ='Pully'
+ORDER BY birthyear DESC;
+
+/*2*/SELECT firstname, lastname, city, place, totaltime, averagetime FROM results
+WHERE city ='Denges' OR firstname='Julien'
+ORDER BY place DESC;
+
+/*3*/SELECT place, firstname, lastname, birthyear, city, totaltime FROM results
+WHERE lastname ='Gomez' AND NOT birthyear = 1985;
+
+
+
+/*Partie 4*/
+
+
+/*1*/SELECT category, count(results.bib) FROM results
+GROUP BY category;
+
+/*2*/SELECT category, count(results.bib), max(results.totaltime) FROM results
+GROUP BY category;
+
+/*3*/SELECT DISTINCT city, count(results.firstname) AS nbrunners FROM results
+GROUP BY city
+ORDER BY nbrunners DESC;
+
+/*4*/SELECT DISTINCT city, count(results.firstname) AS nbrunners FROM results
+GROUP BY city
+HAVING count(results.firstname)>=60
+ORDER BY nbrunners DESC
