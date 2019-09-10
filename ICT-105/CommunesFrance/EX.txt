@@ -1,0 +1,21 @@
+Communes de france
+
+EX 1.1
+
+SELECT department,name,population FROM towns
+WHERE name LIKE "Mont%"
+ORDER BY department DESC;
+
+EX 1.2
+
+SELECT name,department,population,density FROM towns
+WHERE population>500000 or department=29 and density>1000;
+
+EX 1.3 
+
+SELECT department,count(towns.name) AS totTowns FROM towns
+GROUP by totTowns
+ORDER by department
+HAVING count(name) > 500 
+
+PAS TERMINER!!!!
