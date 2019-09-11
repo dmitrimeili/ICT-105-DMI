@@ -14,8 +14,31 @@ WHERE population>500000 or department=29 and density>1000;
 EX 1.3 
 
 SELECT department,count(towns.name) AS totTowns FROM towns
-GROUP by totTowns
-ORDER by department
-HAVING count(name) > 500 
+GROUP by department
+HAVING count(towns.name)>500
+ORDER by totTowns DESC
 
-PAS TERMINER!!!!
+EX 2.1 
+
+INSERT INTO towns(department ,name,code,population,density,area,altitudeMin,altitudeMax)
+VALUES ("74","Genève","74316","201813","12669","15.93","369","458")
+
+EX 2.2 
+
+INSERT INTO towns(department,name,code,population,altitudeMin,altitudeMax)
+VALUES("59","Champignac","59671","1900","235","520")
+
+EX 2.3
+
+PAS POSSIBLE 
+towns.departement NE DOIT PAS ETRE NULL
+
+EX 2.4
+
+la ville est déja dans la base de donnée on ne peut donc pas la rajouter
+
+EX 3.1
+
+UPDATE towns
+SET altitudeMax ="652"
+WHERE name="Marseille"
