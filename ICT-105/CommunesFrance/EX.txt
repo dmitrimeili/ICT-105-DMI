@@ -16,17 +16,17 @@ EX 1.3
 SELECT department,count(towns.name) AS totTowns FROM towns
 GROUP by department
 HAVING count(towns.name)>500
-ORDER by totTowns DESC
+ORDER by totTowns DESC;
 
 EX 2.1 
 
 INSERT INTO towns(department ,name,code,population,density,area,altitudeMin,altitudeMax)
-VALUES ("74","Genève","74316","201813","12669","15.93","369","458")
+VALUES ("74","Genève","74316","201813","12669","15.93","369","458");
 
 EX 2.2 
 
 INSERT INTO towns(department,name,code,population,altitudeMin,altitudeMax)
-VALUES("59","Champignac","59671","1900","235","520")
+VALUES("59","Champignac","59671","1900","235","520");
 
 EX 2.3
 
@@ -41,4 +41,17 @@ EX 3.1
 
 UPDATE towns
 SET altitudeMax ="652"
-WHERE name="Marseille"
+WHERE name="Marseille";
+
+EX 3.2
+
+UPDATE towns
+SET population ="2206488" , density="20934" , altitudeMin="28" , altitudeMax="131"
+WHERE name="Paris";
+
+EX 3.3
+
+UPDATE towns
+SET altitudeMin = altitudeMin+2
+WHERE department ="83";xl
+
