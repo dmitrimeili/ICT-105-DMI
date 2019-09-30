@@ -55,3 +55,7 @@ UPDATE towns
 SET altitudeMin = altitudeMin+2
 WHERE department ="83";xl
 
+EX 3.4
+
+
+
