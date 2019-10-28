@@ -1,0 +1,19 @@
+EX cantons:
+
+partie 1
+
+EX 1
+SELET * FROM cantons
+
+DELETE FROM cantons
+WHERE name = "Sardaigne";
+
+EX 2
+
+INSERT INTO cantons(CODE,NAME,since,capital,population,AREA,nbTowns,altitudeMax,altMin,altMoy)
+VALUES ("LU","Lucerne","1332","Lucerne","403397","1493.44","83","2350","406","777");
+
+EX 3
+UPDATE cantons
+SET altitudeMax = 2502,capital = "Herisau"
+WHERE CODE ="AR"
