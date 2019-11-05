@@ -76,4 +76,14 @@ SELECT players.firstName, players.lastName, sponsors.name AS sponsorName FROM sp
 left join players on sponsors.id = players.sponsor_id
 WHERE players.sponsor_id IS NULL
 
-Question 6: 
+
+EX4 Découvertes et analyses : Options des clé étrangères
+
+
+Que fait cette requête ?
+elle efface depuis la table "sponsors" les lignes aillant le nom "Wilson" a l'interieur
+
+Que se passe-t-il lorsque vous l’exécutez ? Expliquez dans le détail le mécanisme
+Un message d'erreur apparaît"on ne peut pas le supprimer du a des contraintes de la clé étrangère"
+    Faites une conclusion sur le paramètre « RESTRICT »
+
