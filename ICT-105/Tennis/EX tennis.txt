@@ -1,0 +1,100 @@
+EX Tennis
+
+EX1
+
+Question 1:
+Dans quelle table se trouve la clé étrangère ?
+Dans la table players
+
+Question 2:
+Comment se nomme cette clé étrangère ?
+sponsor_id
+
+Question 3:
+A quelle clé fait-elle référence?
+La clé id de la table sponsors
+
+EX2
+
+Question 1:
+Un sponsor peut-il sponsoriser plusieurs joueurs ? 
+Oui
+		
+Un joueur peut-il avoir plusieurs sponsors ? 		
+Non
+ 
+Un sponsor peut-il ne pas avoir de joueur à sponsoriser ? 		
+Oui
+ 
+Un joueur est-il forcément sponsorisé 		
+Non
+
+La clé étrangère peut-elle être NULL ? 	
+Oui
+
+EX3
+
+-- 1ère requête
+SELECT  players.firstName, players.lastName, sponsors.name AS sponsorName FROM players
+inner join sponsors on players.sponsor_id = sponsors.id;
+
+-- 2ème requête
+SELECT players.firstName, players.lastName, sponsors.name AS sponsorName FROM players
+left join sponsors on players.sponsor_id = sponsors.id;
+
+-- 3ème requête  
+SELECT players.firstName, players.lastName, sponsors.name AS sponsorName FROM players
+right join sponsors on players.sponsor_id = sponsors.id;
+
+Question 1:
+SELECT players.firstName , players.lastName,sponsors.name AS sponsorName From players
+LEFT JOIN sponsors ON players.sponsor_id = sponsors.id
+WHERE sponsors.id IS NULL
+
+Question 2:
+SELECT players.firstName , players.lastName,sponsors.name AS sponsorName From players
+RIGHT JOIN sponsors ON players.sponsor_id = sponsors.id
+WHERE players.sponsor_id IS NULL
+
+Question 3:
+SELECT players.firstName, players.lastName, sponsors.name AS sponsorName FROM sponsors
+right join players on sponsors.id = players.sponsor_id;
+
+Question 4:
+SELECT players.firstName, players.lastName, sponsors.name AS sponsorName FROM sponsors
+right join players on sponsors.id = players.sponsor_id
+UNION 
+SELECT players.firstName, players.lastName, sponsors.name AS sponsorName FROM sponsors
+left join players on sponsors.id = players.sponsor_id
+
+Question 5:
+SELECT players.firstName, players.lastName, sponsors.name AS sponsorName FROM sponsors
+right join players on sponsors.id = players.sponsor_id
+WHERE players.sponsor_id IS NULL
+UNION 
+SELECT players.firstName, players.lastName, sponsors.name AS sponsorName FROM sponsors
+left join players on sponsors.id = players.sponsor_id
+WHERE players.sponsor_id IS NULL
+
+
+EX4 Découvertes et analyses : Options des clé étrangères
+
+
+Que fait cette requête ?
+elle efface depuis la table "sponsors" les lignes aillant le nom "Wilson" a l'interieur
+
+Que se passe-t-il lorsque vous l’exécutez ? Expliquez dans le détail le mécanisme
+Un message d'erreur apparaît"on ne peut pas le supprimer du a des contraintes de la clé étrangère"
+
+Faites une conclusion sur le paramètre « RESTRICT »
+on ne peut rien faire quand on a un RESTRICT
+
+Faites une conclusion sur le paramètre "SET NULL"
+SET NULL efface la donnée dans la table sponsors et remplace par NULL la donnée dans la table players
+
+Faites une conclusion sur le paramètre "CASCADE"
+CASCADE efface toutes les lignes qui sont liée a cette donnée
+
+
+
+
