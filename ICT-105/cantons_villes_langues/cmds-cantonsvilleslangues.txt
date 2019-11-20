@@ -1,0 +1,133 @@
+Exo 4 pratique cantons villes langues commandes SQL multi-tables:
+
+-
+SELECT cities.name AS nom_ville, cantons.name AS nom_cantons FROM cities
+RIGHT JOIN cantons ON cities.cantons_id = cantons.id
+ORDER BY nom_cantons;
+
+-
+SELECT cities.name AS nom_ville, cantons.name AS nom_cantons FROM cities
+RIGHT JOIN cantons ON cities.cantons_id = cantons.id
+WHERE cantons.name IN ("Zurich");
+
+-
+SELECT cities.name AS nom_ville, cities.population, cantons.name AS nom_cantons FROM cities
+LEFT JOIN cantons ON cantons.id = cities.cantons_id
+WHERE cities.population >= 30000 
+ORDER BY cities.population DESC;
+
+-
+SELECT COUNT(cities.name) AS nb_villes, cantons.name AS nom FROM cities
+RIGHT JOIN cantons ON cantons.id = cities.cantons_id
+GROUP BY nom
+ORDER BY nb_villes DESC;
+
+-
+SELECT COUNT(cities.name) AS nb_villes, cantons.name AS nom FROM cities
+RIGHT JOIN cantons ON cantons.id = cities.cantons_id
+GROUP BY nom
+having nb_villes > 10
+ORDER BY nb_villes DESC;
+
+-
+tentative ratée 1
+SELECT cantons.name AS nb_cantons FROM cantons
+RIGHT JOIN cantons_has_languages ON cantons_has_languages.cantons_id = cantons.id
+UNION ALL 
+SELECT languages.name AS langue FROM languages
+RIGHT JOIN cantons_has_languages ON cantons_has_languages.languages_id = languages.id;
+
+tentative réussie
+SELECT cantons.name AS nom_cantons, languages.name FROM cantons_has_languages
+LEFT  JOIN cantons ON cantons_has_languages.cantons_id = cantons.id 
+LEFT JOIN languages ON cantons_has_languages.languages_id = languages.id
+
+-
+SELECT cities.name as name, cantons.name AS nom_cantons, languages.name FROM cantons_has_languages
+LEFT  JOIN cantons ON cantons_has_languages.cantons_id = cantons.id 
+LEFT JOIN languages ON cantons_has_languages.languages_id = languages.id
+LEFT JOIN cities ON cantons.id = cities.cantons_id
+
+
+-
+DELETE from cantons
+WHERE NAME = "Berne"
+
+//ca a supprimé toutes les références à ce cantons dans cantons_has_languages et dans cities.
+
+
+
+
+//Test en plus pour l'entrainement à l'examen:
+
+Le nombre de villes qui parle chaque langue. 135 allemand, 65 francais, 9 italien, et 4 romanche.
+-
+SELECT count(cities.name) as nb_cities, languages.name FROM cantons
+LEFT  JOIN cantons_has_languages ON cantons_has_languages.cantons_id = cantons.id 
+LEFT JOIN cities ON cantons.id = cities.cantons_id
+left JOIN languages ON cantons_has_languages.languages_id = languages.id
+GROUP BY languages.name
+
+
+Quel cantons parle plusieurs langues et lesquels parle-t-il ?
+-
+SELECT cantons.name AS nom_cantons, count(languages.name) AS nblangues FROM cantons
+inner JOIN cantons_has_languages ON cantons_has_languages.cantons_id = cantons.id 
+inner JOIN languages ON cantons_has_languages.languages_id = languages.id
+GROUP BY cantons.name
+having nblangues > 1;
+
+
+
+
+Consignes temporaires:
+
+Exercice partie 1 : Requêtes sur plusieurs tables
+
+Écrivez la requête SQL qui donnent le résultat des questions suivantes:
+
+    Affichez toutes les villes ainsi que le nom du canton auxquels ils appartiennent
+
+    Query_01_01
+
+    Affichez toutes les villes ainsi que le nom du canton des villes du canton de Zürich uniquement.
+
+    Query_01_02
+
+    Affichez les villes ayant une population d’au moins 30'000 habitants, la population des villes ainsi que le nom du canton auquel ils appartiennent, classé de la plus à la moins peuplée.
+
+    Query_01_03
+
+    Affichez le nb de villes de chaque canton, classé par ordre décroissant du nombre de villes par canton
+
+    Query_01_04
+
+    Affichez le nb de villes de chaque canton, classé par ordre décroissant du nombre de villes par canton mais uniquement des cantons ayant plus de 10 villes
+
+    Query_01_05
+
+    Affichez tous les cantons ainsi que les langues officielles pratiquées dans ces cantons. Un canton ayant plusieurs langues officielles doit apparaître avec chacune de ses langues officielles.
+
+    Query_01_06
+
+    Query_01_06
+
+    Affichez toutes les villes, les cantons auxquels elles appartiennent ainsi que les langues officielles pratiquées dans les cantons de ces villes.
+
+    Query_01_07
+
+    Effacez le canton de Berne de la table « cantons ».
+
+    a. Quelle conséquence a l’exécution de cette requête sur les autres tables ?
+
+    b. Vérifiez cette conséquence à l’aide d’une requête.
+
+Exercice partie 2 : Modification de la structure de la base de données
+
+Écrivez les requêtes SQL effectuant les modifications demanées sur la base de données. Remarque: une ou plusieurs requêtes ne pourront être réalisées. Le cas lchéant expliquez-en la raison.
+
+    Modifiez la colonne "density" de la table "cities" en type décimal au lieu du type float
+
+    Modifiez la colonne "population" de la table "cities" en type "smallint" au lieu du type int
+
+    Effacez la colonne "area" de la table cities
